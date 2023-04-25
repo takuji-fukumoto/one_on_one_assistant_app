@@ -7,6 +7,7 @@ import '../models/theme_card.dart';
 
 final themeCardRepositoryProvider =
     Provider<RepositoryInterface<ThemeCard>>((ref) {
+  // MEMO: 今後リモートから取得する場合はここで切り替え
   var dataStore = ref.watch(storeProvider);
   return LocalThemeCardRepositoryImpl(dataStore!.box<ThemeCard>());
 });

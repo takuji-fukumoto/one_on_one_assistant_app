@@ -1,7 +1,6 @@
 // TODO: sessionの追加、カードの追加、talkの保存
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_on_one_assistant_app/domain/providers/users_provider.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 
 import '../../presentation/screens/talk_room/talking/memo_section.dart';
 import '../../presentation/screens/talk_room/talking/selected_card_field.dart';
@@ -9,23 +8,19 @@ import '../../presentation/screens/talk_room/talking/talking_screen.dart';
 import '../models/session.dart';
 import '../models/talk.dart';
 import '../repositories/session_repository_provider.dart';
-import '../repositories/talk_repository_provider.dart';
 import 'fetch_user_talks_usecase.dart';
 
 final manageTalkingUseCaseProvider =
     StateNotifierProvider.family<TalksStateNotifier, Talk, int>((ref, userId) {
-  var repository = ref.watch(talkRepositoryProvider);
-
-  return TalksStateNotifier(ref, repository, userId);
+  return TalksStateNotifier(ref, userId);
 });
 
 class TalksStateNotifier extends StateNotifier<Talk> {
-  TalksStateNotifier(this.ref, this.repository, this.userId)
+  TalksStateNotifier(this.ref, this.userId)
       : super(Talk(createdAt: DateTime.now()));
 
   final Ref ref;
   final int userId;
-  final RepositoryInterface<Talk> repository;
 
   Future<void> talkNext() async {
     await _addCurrentSection();

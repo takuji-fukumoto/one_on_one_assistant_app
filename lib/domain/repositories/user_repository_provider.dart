@@ -6,6 +6,7 @@ import '../../store.dart';
 import '../models/user.dart';
 
 final userRepositoryProvider = Provider<RepositoryInterface<User>>((ref) {
+  // MEMO: 今後リモートから取得する場合はここで切り替え
   var dataStore = ref.watch(storeProvider);
   return LocalUserRepositoryImpl(dataStore!.box<User>());
 });
