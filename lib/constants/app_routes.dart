@@ -1,0 +1,16 @@
+enum AppRoute {
+  home,
+  talkRoom,
+  talkDetail,
+  talking,
+  settings,
+  userSettings,
+  addUser,
+  editUser,
+  themeCardSettings,
+  addThemeCard,
+  editThemeCard,
+  supportCardSettings,
+  addSupportCard,
+  editSupportCard,
+}

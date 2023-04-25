@@ -1,0 +1,194 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2009578986103212548",
+      "lastPropertyId": "3:7945753293395431866",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:2933519175349295425",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5329927296244767264",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7945753293395431866",
+          "name": "team",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7523075812434985624",
+      "lastPropertyId": "6:3004164995997978754",
+      "name": "SupportCard",
+      "properties": [
+        {
+          "id": "1:6412979278448205242",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:3935120429150766033",
+          "name": "situation",
+          "type": 9
+        },
+        {
+          "id": "4:3754007626698169638",
+          "name": "advice",
+          "type": 9
+        },
+        {
+          "id": "5:5904567145081543900",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "6:3004164995997978754",
+          "name": "remarks",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6396771214201825356",
+      "lastPropertyId": "7:2459134621113802595",
+      "name": "ThemeCard",
+      "properties": [
+        {
+          "id": "1:7799002690302091823",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:5321449004885325736",
+          "name": "theme",
+          "type": 9
+        },
+        {
+          "id": "4:5368290601811217531",
+          "name": "category",
+          "type": 9
+        },
+        {
+          "id": "5:4136712327409866865",
+          "name": "question",
+          "type": 9
+        },
+        {
+          "id": "6:7753325160718166144",
+          "name": "level",
+          "type": 6
+        },
+        {
+          "id": "7:2459134621113802595",
+          "name": "remarks",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:8161278693556691108",
+      "lastPropertyId": "5:6749613715632658600",
+      "name": "Session",
+      "properties": [
+        {
+          "id": "1:1873491567979912445",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4240032742112221808",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "3:848057104190270163",
+          "name": "talkId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:3199733224183136685",
+          "relationTarget": "Talk"
+        },
+        {
+          "id": "4:8202332186719760625",
+          "name": "usedThemeCardId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:1603394186123264021",
+          "relationTarget": "ThemeCard"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:4421931385673825287",
+          "name": "usedSupportCards",
+          "targetId": "2:7523075812434985624"
+        }
+      ]
+    },
+    {
+      "id": "5:5983027335870608875",
+      "lastPropertyId": "4:3026236419536972974",
+      "name": "Talk",
+      "properties": [
+        {
+          "id": "1:233873084650892178",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5825030105102355764",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "3:3180457027914133256",
+          "name": "memo",
+          "type": 9
+        },
+        {
+          "id": "4:3026236419536972974",
+          "name": "userId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:8542434391590332793",
+          "relationTarget": "User"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "5:5983027335870608875",
+  "lastIndexId": "4:8542434391590332793",
+  "lastRelationId": "1:4421931385673825287",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    6138425523919966058
+  ],
+  "retiredPropertyUids": [
+    4509549394685160263,
+    2684598857201870554,
+    6749613715632658600
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
