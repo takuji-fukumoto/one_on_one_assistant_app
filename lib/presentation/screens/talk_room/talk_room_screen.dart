@@ -74,6 +74,7 @@ class _TalkRoomListView extends ConsumerWidget {
             talk: talk,
           ),
           floatingHeader: true,
+          physics: const BouncingScrollPhysics(),
         );
       },
     );
