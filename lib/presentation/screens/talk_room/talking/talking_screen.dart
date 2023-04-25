@@ -266,22 +266,24 @@ class _MenuButtons extends ConsumerWidget {
         gapW8,
         Expanded(
           child: BaseButton(
-            onPressed: () {
+            onPressed: () async {
               if (!_isSelectedThemeCard(ref)) {
                 _showErrorDialog(context);
                 return;
               }
 
-              ref
+              await ref
                   .read(manageTalkingUseCaseProvider(user.id!).notifier)
-                  .talkNext();
-              pushNewScreenWithRouteSettings(
-                context,
-                settings: RouteSettings(name: AppRoute.talking.name),
-                screen: TalkingScreen(user: user),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
-              );
+                  .talkNext()
+                  .then((value) {
+                pushNewScreenWithRouteSettings(
+                  context,
+                  settings: RouteSettings(name: AppRoute.talking.name),
+                  screen: TalkingScreen(user: user),
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
+              });
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
