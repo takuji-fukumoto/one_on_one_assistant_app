@@ -1,48 +1,49 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_on_one_assistant_app/domain/models/theme_card.dart';
-import 'package:one_on_one_assistant_app/store.dart';
+import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 
-import '../../objectbox.g.dart';
+import '../../../objectbox.g.dart';
 
-final themeCardRepositoryProvider = Provider<ThemeCardRepository>((ref) {
-  var dataStore = ref.watch(storeProvider);
-  // FIXME: ここで初期値入れてもいいかも
-  return ThemeCardRepository(dataStore!.box<ThemeCard>());
-});
-
-class ThemeCardRepository {
+class LocalThemeCardRepositoryImpl implements RepositoryInterface<ThemeCard> {
   final Box<ThemeCard> _box;
 
-  ThemeCardRepository(this._box);
+  LocalThemeCardRepositoryImpl(this._box);
 
+  @override
   Future<ThemeCard?> get(int id) async {
     return await _box.getAsync(id);
   }
 
-  Future<ThemeCard> add(ThemeCard card) async {
-    return await _box.putAndGetAsync(card);
-  }
-
-  Future<void> addMany(List<ThemeCard> cards) async {
-    await _box.putManyAsync(cards);
-  }
-
-  Future<void> update(ThemeCard dstCard) async {
-    await _box.putAsync(dstCard, mode: PutMode.update);
-  }
-
-  Future<List<ThemeCard?>> getMany(List<int> ids) async {
-    return await _box.getManyAsync(ids);
-  }
-
+  @override
   Future<List<ThemeCard>> getAll() async {
     return await _box.getAllAsync();
   }
 
+  @override
+  Future<ThemeCard> add(ThemeCard card) async {
+    return await _box.putAndGetAsync(card);
+  }
+
+  @override
+  Future<void> addMany(List<ThemeCard> cards) async {
+    await _box.putManyAsync(cards);
+  }
+
+  @override
+  Future<void> update(ThemeCard dstCard) async {
+    await _box.putAsync(dstCard, mode: PutMode.update);
+  }
+
+  @override
+  Future<List<ThemeCard?>> getMany(List<int> ids) async {
+    return await _box.getManyAsync(ids);
+  }
+
+  @override
   Future<bool> remove(int id) async {
     return await _box.removeAsync(id);
   }
 
+  @override
   Future<void> removeAll() async {
     _box.removeAllAsync();
   }
