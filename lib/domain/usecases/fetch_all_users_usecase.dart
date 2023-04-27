@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/repositories/user_repository_provider.dart';
 import '../models/user.dart';
-import '../repositories/user_repository_provider.dart';
 
 final fetchAllUsersProvider =
     FutureProvider.autoDispose<List<User>>((ref) async {

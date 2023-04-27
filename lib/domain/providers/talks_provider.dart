@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/models/support_card.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/usecases/fetch_all_talks_usecase.dart';
 
+import '../../data/repositories/talk_repository_provider.dart';
 import '../models/session.dart';
 import '../models/talk.dart';
 import '../models/theme_card.dart';
 import '../models/user.dart';
-import '../repositories/talk_repository_provider.dart';
 
 final talksProvider =
     StateNotifierProvider.autoDispose<TalksStateNotifier, List<Talk>>((ref) {
