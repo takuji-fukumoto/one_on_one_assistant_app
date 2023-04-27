@@ -19,19 +19,19 @@ final supportCardsProvider = StateNotifierProvider.autoDispose<
 
 class SupportCardsStateNotifier extends StateNotifier<List<SupportCard>> {
   SupportCardsStateNotifier(
-      this.ref, this.repository, List<SupportCard>? initialList)
+      this._ref, this._repository, List<SupportCard>? initialList)
       : super(initialList ?? []);
 
-  final Ref ref;
-  final RepositoryInterface<SupportCard> repository;
+  final Ref _ref;
+  final RepositoryInterface<SupportCard> _repository;
 
   Future<void> addCard(SupportCard card) async {
-    var newCard = await repository.add(card);
+    var newCard = await _repository.add(card);
     state = [...state, newCard];
   }
 
   Future<void> updateCard(SupportCard dstCard) async {
-    await repository.update(dstCard);
+    await _repository.update(dstCard);
     state = [
       for (final card in state)
         if (card.id != dstCard.id) card else dstCard,
@@ -39,7 +39,7 @@ class SupportCardsStateNotifier extends StateNotifier<List<SupportCard>> {
   }
 
   Future<void> removeCard(int id) async {
-    await repository.remove(id);
+    await _repository.remove(id);
     state = [
       for (final card in state)
         if (card.id != id) card,
@@ -47,8 +47,8 @@ class SupportCardsStateNotifier extends StateNotifier<List<SupportCard>> {
   }
 
   Future<void> reset() async {
-    await repository.removeAll();
-    await repository.addMany(defaultSupportCards);
+    await _repository.removeAll();
+    await _repository.addMany(defaultSupportCards);
     if (mounted) {
       state = defaultSupportCards;
     }

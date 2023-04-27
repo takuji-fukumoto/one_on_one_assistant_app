@@ -38,6 +38,7 @@ class EditUserScreen extends ConsumerWidget {
         IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () async {
+            // TODO: ポップアップはさむ
             await ref
                 .read(usersProvider.notifier)
                 .removeUser(user.id!)

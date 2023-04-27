@@ -10,7 +10,6 @@ final themeCardsProvider =
     StateNotifierProvider.autoDispose<ThemeCardsStateNotifier, List<ThemeCard>>(
         (ref) {
   var repository = ref.watch(themeCardRepositoryProvider);
-  // var cards = repository.getAll();
   var cards = ref.watch(fetchAllThemeCardsProvider);
   if (cards.isLoading || cards.isRefreshing || cards.isReloading) {
     return ThemeCardsStateNotifier(ref, repository, []);
@@ -21,19 +20,19 @@ final themeCardsProvider =
 
 class ThemeCardsStateNotifier extends StateNotifier<List<ThemeCard>> {
   ThemeCardsStateNotifier(
-      this.ref, this.repository, List<ThemeCard>? initialList)
+      this._ref, this._repository, List<ThemeCard>? initialList)
       : super(initialList ?? []);
 
-  final Ref ref;
-  final RepositoryInterface<ThemeCard> repository;
+  final Ref _ref;
+  final RepositoryInterface<ThemeCard> _repository;
 
   Future<void> addCard(ThemeCard card) async {
-    var newCard = await repository.add(card);
+    var newCard = await _repository.add(card);
     state = [...state, newCard];
   }
 
   Future<void> updateCard(ThemeCard dstCard) async {
-    await repository.update(dstCard);
+    await _repository.update(dstCard);
     state = [
       for (final card in state)
         if (card.id != dstCard.id) card else dstCard,
@@ -41,7 +40,7 @@ class ThemeCardsStateNotifier extends StateNotifier<List<ThemeCard>> {
   }
 
   Future<void> removeCard(int id) async {
-    await repository.remove(id);
+    await _repository.remove(id);
     state = [
       for (final card in state)
         if (card.id != id) card,
@@ -49,8 +48,8 @@ class ThemeCardsStateNotifier extends StateNotifier<List<ThemeCard>> {
   }
 
   Future<void> reset() async {
-    await repository.removeAll();
-    await repository.addMany(defaultThemeCards);
+    await _repository.removeAll();
+    await _repository.addMany(defaultThemeCards);
     if (mounted) {
       state = defaultThemeCards;
     }

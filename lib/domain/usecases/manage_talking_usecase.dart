@@ -16,11 +16,11 @@ final manageTalkingUseCaseProvider =
 });
 
 class TalksStateNotifier extends StateNotifier<Talk> {
-  TalksStateNotifier(this.ref, this.userId)
+  TalksStateNotifier(this._ref, this._userId)
       : super(Talk(createdAt: DateTime.now()));
 
-  final Ref ref;
-  final int userId;
+  final Ref _ref;
+  final int _userId;
 
   Future<void> talkNext() async {
     await _addCurrentSection();
@@ -29,32 +29,32 @@ class TalksStateNotifier extends StateNotifier<Talk> {
   }
 
   void resetSession() {
-    ref.read(selectedThemeCardProvider.notifier).state = null;
-    ref.read(selectedSupportCardsProvider.notifier).state = [];
-    ref.invalidate(segmentProvider);
+    _ref.read(selectedThemeCardProvider.notifier).state = null;
+    _ref.read(selectedSupportCardsProvider.notifier).state = [];
+    _ref.invalidate(segmentProvider);
   }
 
   void resetTalk() {
     resetSession();
-    ref.read(editedMemoProvider.notifier).state = '';
+    _ref.read(editedMemoProvider.notifier).state = '';
   }
 
   Future<void> finishTalk() async {
     await _addCurrentSection();
     _updateMemo();
-    await ref.read(usersProvider.notifier).addUserTalk(userId, state);
+    await _ref.read(usersProvider.notifier).addUserTalk(_userId, state);
     resetTalk();
-    ref.invalidate(fetchUserTalksProvider(userId));
+    _ref.invalidate(fetchUserTalksProvider(_userId));
   }
 
   Future<void> _addCurrentSection() async {
-    var usedTheme = ref.read(selectedThemeCardProvider);
-    var usedSupports = ref.read(selectedSupportCardsProvider);
+    var usedTheme = _ref.read(selectedThemeCardProvider);
+    var usedSupports = _ref.read(selectedSupportCardsProvider);
     var newSession = Session(createdAt: DateTime.now());
     newSession.usedThemeCard.target = usedTheme;
     newSession.usedSupportCards.addAll(usedSupports);
     newSession.talk.target = state;
-    await ref.read(sessionRepositoryProvider).add(newSession);
+    await _ref.read(sessionRepositoryProvider).add(newSession);
 
     var sessions = state.sessions;
     sessions.add(newSession);
@@ -62,7 +62,7 @@ class TalksStateNotifier extends StateNotifier<Talk> {
   }
 
   void _updateMemo() {
-    var memo = ref.read(editedMemoProvider);
+    var memo = _ref.read(editedMemoProvider);
     state = state.copyWith(memo: memo);
   }
 }

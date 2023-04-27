@@ -44,6 +44,11 @@ class LocalUserRepositoryImpl implements RepositoryInterface<User> {
   }
 
   @override
+  Future<void> removeMany(List<int> ids) async {
+    await _box.removeManyAsync(ids);
+  }
+
+  @override
   Future<void> removeAll() async {
     await _box.removeAllAsync();
   }
