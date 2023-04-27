@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
+import '../../domain/models/objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 final storeProvider = Provider<Store?>((ref) => null);
 

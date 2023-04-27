@@ -1,7 +1,7 @@
 import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/models/support_card.dart';
 
-import '../../../objectbox.g.dart';
+import '../../../domain/models/objectbox.g.dart';
 
 class LocalSupportCardRepositoryImpl
     implements RepositoryInterface<SupportCard> {

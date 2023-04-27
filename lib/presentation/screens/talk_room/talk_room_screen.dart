@@ -113,7 +113,9 @@ class _ChatBubble extends StatelessWidget {
                 ),
                 Expanded(
                   child: BubbleSpecialThree(
-                    text: talk.memo ?? 'メモはありません',
+                    text: (talk.memo != null && talk.memo!.isNotEmpty)
+                        ? talk.memo!
+                        : 'メモはありません',
                     color: AppColors.ivory,
                     tail: true,
                     isSender: false,

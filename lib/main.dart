@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:one_on_one_assistant_app/store.dart';
+import 'package:one_on_one_assistant_app/data/repositories/local_store_provider.dart';
 
 import 'app.dart';
 
