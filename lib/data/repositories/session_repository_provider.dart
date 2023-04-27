@@ -3,7 +3,7 @@ import 'package:one_on_one_assistant_app/data/repositories/local/session_reposit
 import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 
 import '../../domain/models/session.dart';
-import '../../store.dart';
+import 'local_store_provider.dart';
 
 final sessionRepositoryProvider = Provider<RepositoryInterface<Session>>((ref) {
   // MEMO: 今後リモートから取得する場合はここで切り替え

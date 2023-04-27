@@ -3,7 +3,7 @@ import 'package:one_on_one_assistant_app/data/repositories/local/support_card_re
 import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 
 import '../../domain/models/support_card.dart';
-import '../../store.dart';
+import 'local_store_provider.dart';
 
 final supportCardRepositoryProvider =
     Provider<RepositoryInterface<SupportCard>>((ref) {

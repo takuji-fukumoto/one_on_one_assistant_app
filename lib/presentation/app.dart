@@ -4,8 +4,8 @@ import 'package:one_on_one_assistant_app/presentation/screens/settings/settings_
 import 'package:one_on_one_assistant_app/presentation/screens/talks/talks_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-import 'constants/app_colors.dart';
-import 'constants/app_sizes.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

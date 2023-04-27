@@ -1,7 +1,7 @@
 import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 
+import '../../../domain/models/objectbox.g.dart';
 import '../../../domain/models/talk.dart';
-import '../../../objectbox.g.dart';
 
 class LocalTalkRepositoryImpl implements RepositoryInterface<Talk> {
   final Box<Talk> _box;

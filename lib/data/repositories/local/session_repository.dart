@@ -1,7 +1,7 @@
 import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 
+import '../../../domain/models/objectbox.g.dart';
 import '../../../domain/models/session.dart';
-import '../../../objectbox.g.dart';
 
 class LocalSessionRepositoryImpl implements RepositoryInterface<Session> {
   final Box<Session> _box;
