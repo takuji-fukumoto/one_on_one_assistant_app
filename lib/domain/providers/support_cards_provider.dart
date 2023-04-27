@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_on_one_assistant_app/constants/default_data.dart';
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/models/support_card.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/usecases/fetch_all_support_cards_usecase.dart';
 
-import '../repositories/support_card_repository_provider.dart';
+import '../../data/repositories/support_card_repository_provider.dart';
 
 final supportCardsProvider = StateNotifierProvider.autoDispose<
     SupportCardsStateNotifier, List<SupportCard>>((ref) {

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/repositories/talk_repository_provider.dart';
 import '../models/talk.dart';
-import '../repositories/talk_repository_provider.dart';
 
 final fetchTalkUseCaseProvider =
     FutureProvider.autoDispose.family<Talk?, int>((ref, talkId) async {

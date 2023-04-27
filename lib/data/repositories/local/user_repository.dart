@@ -1,7 +1,7 @@
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 
+import '../../../domain/models/user.dart';
 import '../../../objectbox.g.dart';
-import '../../models/user.dart';
 
 class LocalUserRepositoryImpl implements RepositoryInterface<User> {
   final Box<User> _box;

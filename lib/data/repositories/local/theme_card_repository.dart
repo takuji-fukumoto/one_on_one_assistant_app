@@ -1,5 +1,5 @@
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/models/theme_card.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 
 import '../../../objectbox.g.dart';
 

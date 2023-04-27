@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_on_one_assistant_app/constants/default_data.dart';
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/models/theme_card.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
 import 'package:one_on_one_assistant_app/domain/usecases/fetch_all_theme_cards_usecase.dart';
 
-import '../repositories/theme_card_repository_provider.dart';
+import '../../data/repositories/theme_card_repository_provider.dart';
 
 final themeCardsProvider =
     StateNotifierProvider.autoDispose<ThemeCardsStateNotifier, List<ThemeCard>>(

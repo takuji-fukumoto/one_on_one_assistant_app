@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:one_on_one_assistant_app/data/repositories/repository_interface.dart';
+import 'package:one_on_one_assistant_app/data/repositories/session_repository_provider.dart';
 import 'package:one_on_one_assistant_app/domain/providers/talks_provider.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
-import 'package:one_on_one_assistant_app/domain/repositories/session_repository_provider.dart';
 
+import '../../data/repositories/user_repository_provider.dart';
 import '../models/talk.dart';
 import '../models/user.dart';
-import '../repositories/user_repository_provider.dart';
 import '../usecases/fetch_all_users_usecase.dart';
 
 final usersProvider =

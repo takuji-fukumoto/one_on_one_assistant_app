@@ -2,12 +2,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_on_one_assistant_app/domain/providers/users_provider.dart';
 
+import '../../data/repositories/session_repository_provider.dart';
 import '../../presentation/screens/talk_room/talking/memo_section.dart';
 import '../../presentation/screens/talk_room/talking/selected_card_field.dart';
 import '../../presentation/screens/talk_room/talking/talking_screen.dart';
 import '../models/session.dart';
 import '../models/talk.dart';
-import '../repositories/session_repository_provider.dart';
 import 'fetch_user_talks_usecase.dart';
 
 final manageTalkingUseCaseProvider =
