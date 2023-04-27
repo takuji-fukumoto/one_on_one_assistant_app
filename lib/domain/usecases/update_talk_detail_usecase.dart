@@ -11,11 +11,11 @@ final updateTalkDetailUseCaseProvider =
 });
 
 class UpdateTalkDetailUseCase {
-  UpdateTalkDetailUseCase(this.ref);
-  final Ref ref;
+  UpdateTalkDetailUseCase(this._ref);
+  final Ref _ref;
 
   Future<void> execute(User user, Talk talk) async {
-    await ref.read(usersProvider.notifier).updateUserTalk(user.id!, talk);
-    ref.invalidate(fetchUserTalksProvider);
+    await _ref.read(usersProvider.notifier).updateUserTalk(user.id!, talk);
+    _ref.invalidate(fetchUserTalksProvider);
   }
 }
