@@ -6,6 +6,7 @@ import 'package:one_on_one_assistant_app/domain/usecases/fetch_all_talks_usecase
 import '../models/session.dart';
 import '../models/talk.dart';
 import '../models/theme_card.dart';
+import '../models/user.dart';
 import '../repositories/talk_repository_provider.dart';
 
 final talksProvider =
@@ -20,19 +21,19 @@ final talksProvider =
 });
 
 class TalksStateNotifier extends StateNotifier<List<Talk>> {
-  TalksStateNotifier(this.ref, this.repository, List<Talk>? initialList)
+  TalksStateNotifier(this._ref, this._repository, List<Talk>? initialList)
       : super(initialList ?? []);
 
-  final Ref ref;
-  final RepositoryInterface<Talk> repository;
+  final Ref _ref;
+  final RepositoryInterface<Talk> _repository;
 
   Future<void> addTalk(Talk talk) async {
-    var newTalk = await repository.add(talk);
+    var newTalk = await _repository.add(talk);
     state = [...state, newTalk];
   }
 
   Future<void> updateTalk(Talk dstTalk) async {
-    await repository.update(dstTalk);
+    await _repository.update(dstTalk);
     if (mounted) {
       state = [
         for (final talk in state)
@@ -42,20 +43,41 @@ class TalksStateNotifier extends StateNotifier<List<Talk>> {
   }
 
   Future<void> removeTalk(int id) async {
-    await repository.remove(id);
+    await _repository.remove(id);
     state = [
       for (final talk in state)
         if (talk.id != id) talk,
     ];
   }
 
+  Future<void> removeTalks(List<int> ids) async {
+    await _repository.removeMany(ids);
+
+    state = [
+      for (final talk in state)
+        if (!ids.contains(talk.id)) talk,
+    ];
+  }
+
+  Future<void> removeUserAllTalks(User user) async {
+    var userTalkIds = state
+        .where((element) => element.user.target?.id == user.id)
+        .map((e) => e.id!)
+        .toList();
+    await removeTalks(userTalkIds);
+    state = [
+      for (final talk in state)
+        if (!userTalkIds.contains(talk.id)) talk,
+    ];
+  }
+
   Future<List<Session>> getTalkSessions(int talkId) async {
-    var talk = await repository.get(talkId);
+    var talk = await _repository.get(talkId);
     return talk!.sessions;
   }
 
   Future<void> addSession(int talkId, Session session) async {
-    var dstTalk = await repository.get(talkId);
+    var dstTalk = await _repository.get(talkId);
     dstTalk!.addSession(session);
     state = [
       for (final talk in state)
@@ -65,7 +87,7 @@ class TalksStateNotifier extends StateNotifier<List<Talk>> {
 
   Future<void> addThemeCardToSession(
       int talkId, int sessionId, ThemeCard card) async {
-    var dstTalk = await repository.get(talkId);
+    var dstTalk = await _repository.get(talkId);
     dstTalk!.sessions
         .firstWhere((element) => element.id == sessionId)
         .addThemeCard(card);
@@ -77,7 +99,7 @@ class TalksStateNotifier extends StateNotifier<List<Talk>> {
 
   Future<void> addSupportCardToSession(
       int talkId, int sessionId, SupportCard card) async {
-    var dstTalk = await repository.get(talkId);
+    var dstTalk = await _repository.get(talkId);
     dstTalk!.sessions
         .firstWhere((element) => element.id == sessionId)
         .addSupportCard(card);

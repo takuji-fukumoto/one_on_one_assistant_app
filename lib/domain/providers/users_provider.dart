@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:one_on_one_assistant_app/domain/providers/talks_provider.dart';
 import 'package:one_on_one_assistant_app/domain/repositories/repository_interface.dart';
+import 'package:one_on_one_assistant_app/domain/repositories/session_repository_provider.dart';
 
 import '../models/talk.dart';
 import '../models/user.dart';
@@ -43,11 +45,21 @@ class UsersStateNotifier extends StateNotifier<List<User>> {
   }
 
   Future<void> removeUser(int id) async {
-    // TODO: ユーザーに紐づくTalk, Sessionを全て削除する
     var user = await repository.get(id);
     if (user == null) {
       return;
     }
+
+    // ユーザーに紐づくTalk, Sessionを全て削除
+    await ref.read(talksProvider.notifier).removeUserAllTalks(user);
+    // TODO: session providerに移行する
+    var userSessionIds = <int>[];
+    for (var talk in user.talks) {
+      for (var session in talk.sessions) {
+        userSessionIds.add(session.id!);
+      }
+    }
+    await ref.read(sessionRepositoryProvider).removeMany(userSessionIds);
 
     await repository.remove(id);
     state = [

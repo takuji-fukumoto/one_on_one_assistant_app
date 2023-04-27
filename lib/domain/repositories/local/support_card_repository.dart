@@ -45,6 +45,11 @@ class LocalSupportCardRepositoryImpl
   }
 
   @override
+  Future<void> removeMany(List<int> ids) async {
+    await _box.removeManyAsync(ids);
+  }
+
+  @override
   Future<void> removeAll() async {
     _box.removeAllAsync();
   }

@@ -13,5 +13,7 @@ abstract class RepositoryInterface<T> {
 
   Future<bool> remove(int id);
 
+  Future<void> removeMany(List<int> ids);
+
   Future<void> removeAll();
 }
